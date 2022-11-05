@@ -1,0 +1,64 @@
+{% extends "plantilla.html" %}
+
+{% block titulo %}
+Gestion de Materias
+{% endblock %}
+
+{% block contenido %}
+
+{% if modelo.error %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{ modelo.error }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+
+<div class="row">
+    <div class="col">
+        <table class="table table-primary table-striped ">
+            <thead>
+                <tr>
+                    <th colspan="3" style="text-align: center;">Listado de Materias Registradas</th>
+                </tr>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Créditos</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for materia in modelo.materias %}
+                <tr>
+                    <td>{{ materia.0 }}</td>
+                    <td>{{ materia.1 }}</td>
+                    <td>{{ materia.2 }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col bg-primary text-white" style="padding: 10px;">
+        <h3>Registro de Materias</h3>
+        <form action="/admin/materias/nueva" method="post">
+            <div class="mb-3">
+                <label for="exampleInputId" class="form-label">Id</label>
+                <input type="text" class="form-control" id="exampleInputId" name="id">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputNombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="exampleInputNombre" name="nombre">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputCreditos" class="form-label">Créditos</label>
+                <input type="text" class="form-control" id="exampleInputCreditos" name="creditos">
+            </div>
+            <div style="text-align: end;">
+                <button type="submit" class="btn btn-success">Registrar Materia</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock %}
